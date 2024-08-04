@@ -29,21 +29,33 @@ func main() {
 		fmt.Scan(&firstName)
 		fmt.Println("Please enter your last name")
 		fmt.Scan(&lastName)
+		var isValidName = len(firstName) > 0 && len(lastName) > 0
 
 		bookings = append(bookings, firstName+" "+lastName)
 		fmt.Println("Please enter your email")
 		fmt.Scan(&email)
+		var isValideEmail = strings.Contains(email, "@") && strings.Contains(email, ".")
 		fmt.Println("Please enter the number of tickets you want to book")
 		fmt.Scan(&userTickets)
-		remainingTickets = remainingTickets - userTickets
-		fmt.Printf("Thank you %v for booking %v tickets for our %v", firstName, userTickets, conferenceName)
-		fmt.Printf("We have %v tickets remaining\n", remainingTickets)
-		firstNames := []string{}
-		for _, booking := range bookings {
-			var names = strings.Fields(booking)
-			firstNames = append(firstNames, names[0])
-		}
-		fmt.Printf("The person who have booked the ticket are %v\n", firstNames)
+		validTicketsnumber := userTickets > 0 && userTickets <= remainingTickets
 
+		if isValidName && isValideEmail && validTicketsnumber {
+			remainingTickets = remainingTickets - userTickets
+			fmt.Printf("Thank you %v for booking %v tickets for our %v", firstName, userTickets, conferenceName)
+			fmt.Printf("We have %v tickets remaining\n", remainingTickets)
+			firstNames := []string{}
+			for _, booking := range bookings {
+				//string.Fields gives a list of words/strings seperated by word as seperate elements of an array
+				var names = strings.Fields(booking)
+				firstNames = append(firstNames, names[0])
+			}
+			fmt.Printf("The person who have booked the ticket are %v\n", firstNames)
+		}
+
+		if remainingTickets == 0 {
+			fmt.Println("We are sold out")
+			break
+
+		}
 	}
 }
