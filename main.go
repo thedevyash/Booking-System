@@ -50,12 +50,13 @@ func main() {
 				firstNames = append(firstNames, names[0])
 			}
 			fmt.Printf("The person who have booked the ticket are %v\n", firstNames)
+			if remainingTickets == 0 {
+				fmt.Println("We are sold out")
+				break
+			}
+		} else {
+			fmt.Println("Please enter a valid name, email and number of tickets")
 		}
 
-		if remainingTickets == 0 {
-			fmt.Println("We are sold out")
-			break
-
-		}
 	}
 }
