@@ -10,9 +10,7 @@ func main() {
 	//or    conferenceName:="Go conference"
 	const conferenceTickets uint = 50
 	var remainingTickets uint = 50
-	fmt.Println("Welcom to our", conferenceName, "booking application")
-	fmt.Println("We have", conferenceTickets, "tickets available", "and these many are remaining", remainingTickets)
-	fmt.Println("Get your ticket now")
+	greet(conferenceName, conferenceTickets, remainingTickets)
 	//dynamic list or slice
 	var bookings []string
 	//or bookings:=[]string{}
@@ -43,13 +41,9 @@ func main() {
 			remainingTickets = remainingTickets - userTickets
 			fmt.Printf("Thank you %v for booking %v tickets for our %v", firstName, userTickets, conferenceName)
 			fmt.Printf("We have %v tickets remaining\n", remainingTickets)
-			firstNames := []string{}
-			for _, booking := range bookings {
-				//string.Fields gives a list of words/strings seperated by word as seperate elements of an array
-				var names = strings.Fields(booking)
-				firstNames = append(firstNames, names[0])
-			}
-			fmt.Printf("The person who have booked the ticket are %v\n", firstNames)
+
+			printFirstNames(bookings)
+
 			if remainingTickets == 0 {
 				fmt.Println("We are sold out")
 				break
@@ -59,4 +53,20 @@ func main() {
 		}
 
 	}
+}
+
+func printFirstNames(bookings []string) {
+	firstNames := []string{}
+	for _, booking := range bookings {
+		//string.Fields gives a list of words/strings seperated by word as seperate elements of an array
+		var names = strings.Fields(booking)
+		firstNames = append(firstNames, names[0])
+	}
+	fmt.Printf("The person who have booked the ticket are %v\n", firstNames)
+}
+
+func greet(conferenceName string, conferenceTickets uint, remainingTickets uint) {
+	fmt.Println("Welcom to our", conferenceName, "booking application")
+	fmt.Println("We have", conferenceTickets, "tickets available", "and these many are remaining", remainingTickets)
+	fmt.Println("Get your ticket now")
 }
